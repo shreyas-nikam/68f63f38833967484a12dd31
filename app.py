@@ -1,1 +1,39 @@
-# Starter Python file
+
+import streamlit as st
+
+st.set_page_config(page_title="QuLab", layout="wide")
+
+st.sidebar.image("https://www.quantuniversity.com/assets/img/logo5.jpg")
+st.sidebar.divider()
+st.title("AI Career Navigator & Pathway Planner")
+st.divider()
+
+st.markdown("""
+In this lab, we will explore the AI-Readiness Score (AI-R) framework, a parametric model designed to quantify an individual's preparedness for AI-enabled careers. The AI-R score helps in navigating career transitions by considering both individual capabilities and market opportunities.
+
+The core formula for the AI-Readiness Score for an individual $i$ at time $t$ is defined as:
+""")
+st.latex(r""" AI-R_{i,t} = \alpha \cdot V^R_i(t) + (1-\alpha) \cdot H^R_i(t) + \beta \cdot \text{Synergy}\%(V^R, H^R) """)
+st.markdown("""
+Where:
+-   $V^R(t)$ is the Idiosyncratic Readiness (individual capability).
+-   $H^R(t)$ is the Systematic Opportunity (market demand).
+-   $\\alpha \in [0,1]$ is the weight on individual vs. market factors.
+-   $\\beta > 0$ is the Synergy coefficient.
+-   Both $V^R$ and $H^R$ are normalized to $[0, 100]$.
+-   $\text{Synergy}\%$ is also normalized to $[0, 100]$ percentage units.
+
+This framework allows for dynamic "what-if" scenario planning, enabling users to understand how different learning pathways and career transitions impact their future career prospects.
+""")
+
+page = st.sidebar.selectbox(label="Navigation", options=["AI-Readiness Score", "Pathway Simulation", "Data Explorer"])
+
+if page == "AI-Readiness Score":
+    from application_pages.page1 import run_page1
+    run_page1()
+elif page == "Pathway Simulation":
+    from application_pages.page2 import run_page2
+    run_page2()
+elif page == "Data Explorer":
+    from application_pages.page3 import run_page3
+    run_page3()
